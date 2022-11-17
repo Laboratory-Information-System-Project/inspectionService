@@ -1,5 +1,5 @@
 server:
-  port: 0
+  port: 8880
 
 spring:
   application:
@@ -9,11 +9,11 @@ spring:
 #    port: 5672
 #    username: guest
 #    password: guest
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url:
-#    username:
-#    password:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.40.12:33306/inspection
+    username: scott
+    password: tiger
 
 eureka:
   instance:
@@ -35,3 +35,9 @@ management:
 #token:
 #  expireTime: 86400000
 #  secret: user_token
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/**/*.xml
+
