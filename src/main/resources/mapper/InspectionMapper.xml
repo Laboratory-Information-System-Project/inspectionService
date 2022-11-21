@@ -5,26 +5,35 @@
 
 <mapper namespace="com.douzone.inspectionservice.mapper.InspectionMapper">
 
-    <select id="getAllRegisterMapper" resultType="com.douzone.inspectionservice.domain.RegisterDTO">
+    <select id="getTodayRegisterMapper" resultType="com.douzone.inspectionservice.domain.RegisterDTO">
         select *
         from register
+        where left(register_dt, 10) = left(now(), 10)
     </select>
 
     <select id="getSearchRegisterMapper" resultType="com.douzone.inspectionservice.domain.RegisterDTO" parameterType="com.douzone.inspectionservice.domain.SearchDTO">
         select *
         from register
         <if test="barcode == null">
-            <if test="stDate != null">
-                where  left(register_dt, 10) between #{stDate} and #{endDate};
+            <if test="stDate != ''">
+                where left(register_dt, 10) between #{stDate} and #{endDate};
+            </if>
+            <if test="stDate == ''">
+                where left(register_dt, 10) = left(#{endDate}, 10)
             </if>
         </if>
         <if test="barcode != null">
             where barcode=#{barcode}
-            <if test="stDate != null">
-                and  left(register_dt, 10) between #{stDate} and #{endDate};
+            <if test="stDate != ''">
+                and left(register_dt, 10) between #{stDate} and #{endDate};
+            </if>
+            <if test="stDate == ''">
+                and left(register_dt, 10) = left(#{endDate}, 10)
             </if>
         </if>
     </select>
+
+
 
     <select id="getSearchRegisterNotDateMapper" resultType="com.douzone.inspectionservice.domain.RegisterDTO" parameterType="Long">
         select *

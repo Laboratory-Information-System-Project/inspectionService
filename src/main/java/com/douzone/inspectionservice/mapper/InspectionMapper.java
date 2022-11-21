@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface InspectionMapper {
 
-    List<RegisterDTO> getAllRegisterMapper();
+    List<RegisterDTO> getTodayRegisterMapper();
 
     List<RegisterDTO> getSearchRegisterMapper(SearchDTO search);
 

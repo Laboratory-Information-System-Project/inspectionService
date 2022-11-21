@@ -12,6 +12,6 @@ import java.sql.Date;
 @AllArgsConstructor
 public class SearchDTO {
     private Long barcode;
-    private Date stDate;
-    private Date endDate;
+    private String stDate;
+    private String endDate;
 }

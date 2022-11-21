@@ -16,9 +16,9 @@ public class InspectionController {
 
     private final InspectionService service;
 
-    @GetMapping("/register/all")
-    public List<RegisterDTO> getAllRegister(){
-        return service.getAllRegister();
+    @GetMapping("/register/today")
+    public List<RegisterDTO> getTodayRegister(){
+        return service.getTodayRegister();
     }
 
     @GetMapping("/register/search")
@@ -26,7 +26,7 @@ public class InspectionController {
         return service.getSearchRegister(search);
     }
 
-    @GetMapping("/register/{barcode}")
+    @GetMapping("/register/search/{barcode}")
     public List<RegisterDTO> getSearchRegisterNotDate(@PathVariable Long barcode){
         return service.getSearchRegisterNotDate(barcode);
     }

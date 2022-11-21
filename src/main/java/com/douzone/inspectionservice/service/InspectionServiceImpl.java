@@ -16,8 +16,8 @@ public class InspectionServiceImpl implements InspectionService{
     private final InspectionMapper mapper;
 
     @Override
-    public List<RegisterDTO> getAllRegister(){
-        return mapper.getAllRegisterMapper();
+    public List<RegisterDTO> getTodayRegister(){
+        return mapper.getTodayRegisterMapper();
     }
 
     @Override

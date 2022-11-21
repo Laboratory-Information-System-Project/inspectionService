@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface InspectionService {
 
-    List<RegisterDTO> getAllRegister();
+    List<RegisterDTO> getTodayRegister();
 
     List<RegisterDTO> getSearchRegister(SearchDTO search);
 
