@@ -5,17 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ConclusionDTO {
+public class ConclusionDTO implements Serializable {
     private Long resultNo;
+    private String inspectionCode;
     private Long registerCode;
     private String figures;
-    private LocalDateTime firstInspectionDt;
-    private LocalDateTime lastInspectionDt;
+    private LocalDateTime inspectionDt;
+    private LocalDateTime reportedDt;
     private String note;
-    private String sampleNote;
 }

@@ -5,57 +5,25 @@
 
 <mapper namespace="com.douzone.inspectionservice.mapper.InspectionMapper">
 
-    <select id="getTodayRegisterMapper" resultType="com.douzone.inspectionservice.domain.RegisterDTO">
-        select *
-        from register
-        where left(register_dt, 10) = left(now(), 10)
-    </select>
+    <insert id="insertConclusionBatchMapper" parameterType="com.douzone.inspectionservice.domain.ConclusionDTO">
 
-    <select id="getSearchRegisterMapper" resultType="com.douzone.inspectionservice.domain.RegisterDTO" parameterType="com.douzone.inspectionservice.domain.SearchDTO">
-        select *
-        from register
-        <if test="barcode == null">
-            <if test="stDate != ''">
-                where left(register_dt, 10) between #{stDate} and #{endDate};
+        INSERT INTO conclusion (inspection_code, register_code, figures, inspection_dt, note)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            <if test="index >= 0">
+                (#{item.inspectionCode},#{item.registerCode},#{item.figures},now(),#{item.note})
             </if>
-            <if test="stDate == ''">
-                where left(register_dt, 10) = left(#{endDate}, 10)
-            </if>
-        </if>
-        <if test="barcode != null">
-            where barcode=#{barcode}
-            <if test="stDate != ''">
-                and left(register_dt, 10) between #{stDate} and #{endDate};
-            </if>
-            <if test="stDate == ''">
-                and left(register_dt, 10) = left(#{endDate}, 10)
-            </if>
-        </if>
-    </select>
-
-
-
-    <select id="getSearchRegisterNotDateMapper" resultType="com.douzone.inspectionservice.domain.RegisterDTO" parameterType="Long">
-        select *
-        from register
-        where barcode = #{text}
-    </select>
-
-    <insert id="insertConclusionMapper" parameterType="com.douzone.inspectionservice.domain.ConclusionDTO">
-        INSERT INTO conclusion (register_code, figures, first_inspection_dt, note, sample_note)
-        VALUES (#{registerCode},#{figures},now(),#{note},#{sampleNote});
+        </foreach>;
     </insert>
 
-    <select id="getAllConclusionMapper" resultType="com.douzone.inspectionservice.domain.ConclusionDTO">
-        select *
-        from conclusion
-    </select>
-
-    <update id="updateConclusionMapper" parameterType="com.douzone.inspectionservice.domain.RegisterDTO">
+    <update id="updateConclusionBatchMapper" parameterType="com.douzone.inspectionservice.domain.ConclusionDTO">
+        <foreach collection="list" item="item" index="index" separator=";">
         UPDATE conclusion
-        SET figures= #{figures}, last_inspection_dt=now(),note= #{note}, sample_note=#{sampleNote}
-        WHERE register_code = #{registerCode}
+        <set>
+            inspection_dt=now(), figures= #{item.figures}, note= #{item.note}
+        </set>
+        WHERE result_no=#{item.resultNo}
+        </foreach>
     </update>
-
 
 </mapper>

@@ -11,7 +11,7 @@ spring:
 #    password: guest
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.40.12:33306/inspection
+    url: jdbc:mysql://192.168.40.12:33306/inspection?allowMultiQueries=true
     username: scott
     password: tiger
 

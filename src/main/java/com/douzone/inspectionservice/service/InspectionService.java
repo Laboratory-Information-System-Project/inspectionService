@@ -1,22 +1,12 @@
 package com.douzone.inspectionservice.service;
 
 import com.douzone.inspectionservice.domain.ConclusionDTO;
-import com.douzone.inspectionservice.domain.RegisterDTO;
-import com.douzone.inspectionservice.domain.SearchDTO;
 
 import java.util.List;
 
 public interface InspectionService {
 
-    List<RegisterDTO> getTodayRegister();
+    void insertConclusionBatch(List<ConclusionDTO> conclusion);
 
-    List<RegisterDTO> getSearchRegister(SearchDTO search);
-
-    List<RegisterDTO> getSearchRegisterNotDate(Long barcode);
-
-    void insertConclusion(ConclusionDTO conclusion);
-
-    List<ConclusionDTO> getAllConclusion();
-
-    void updateConclusion(ConclusionDTO conclusion);
+    void updateConclusionBatch(List<ConclusionDTO> conclusion);
 }
