@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.douzone.inspectionservice.mapper.InspectionMapper">
+
+    <insert id="insertConclusionBatchMapper" parameterType="com.douzone.inspectionservice.domain.ConclusionDTO">
+
+        INSERT INTO conclusion (inspection_code, register_code, figures, inspection_dt, note)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            <if test="index >= 0">
+                (#{item.inspectionCode},#{item.registerCode},#{item.figures},now(),#{item.note})
+            </if>
+        </foreach>;
+    </insert>
+
+    <update id="updateConclusionBatchMapper" parameterType="com.douzone.inspectionservice.domain.ConclusionDTO">
+        <foreach collection="list" item="item" index="index" separator=";">
+        UPDATE conclusion
+        <set>
+            inspection_dt=now(), figures= #{item.figures}, note= #{item.note}
+        </set>
+        WHERE result_no=#{item.resultNo}
+        </foreach>
+    </update>
+
+</mapper>

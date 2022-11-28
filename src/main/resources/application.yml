@@ -1,5 +1,6 @@
 server:
   port: 0
+
 spring:
   application:
     name: inspection-service
@@ -11,7 +12,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #    url: jdbc:mysql://192.168.0.189:33306/collecting?allowMultiQueries=true
-    url: jdbc:mysql://192.168.0.189:33306/inspection
+    url: jdbc:mysql://192.168.40.12:33306/inspection?allowMultiQueries=true
     username: scott
     password: tiger
 
@@ -34,8 +35,10 @@ management:
         include: refresh, health, beans, busrefresh
 #token:
 #  expireTime: 86400000
+#  secret: user_token
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/**/*.xml
+
 #  secret: user_token
