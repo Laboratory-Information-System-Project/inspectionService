@@ -7,6 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,5 +53,8 @@ public class KafkaProducer {
     //     return userDto;
     // }
 
+    public void send(String topic, String barcode){
 
+        kafkaTemplate.send(topic, barcode);
+    }
 }

@@ -19,4 +19,5 @@ public class ConclusionDTO implements Serializable {
     private LocalDateTime inspectionDt;
     private LocalDateTime reportedDt;
     private String note;
+    private String barcode;
 }
