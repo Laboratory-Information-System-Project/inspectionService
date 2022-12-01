@@ -16,4 +16,5 @@ public class InspectionAddDTO {
     private String inspectorId;
     private String barcode;
     private LocalDate registerDt;
+    private Long prescribeCode;
 }

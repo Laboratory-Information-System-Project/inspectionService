@@ -12,7 +12,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #    url: jdbc:mysql://192.168.0.189:33306/collecting?allowMultiQueries=true
-    url: jdbc:mysql://192.168.40.12:33306/inspection?allowMultiQueries=true
+    url: jdbc:mysql://192.168.0.189:33306/inspection?allowMultiQueries=true
     username: scott
     password: tiger
 
