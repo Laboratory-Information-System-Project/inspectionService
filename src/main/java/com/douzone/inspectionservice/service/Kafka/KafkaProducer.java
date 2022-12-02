@@ -23,8 +23,8 @@ public class KafkaProducer {
         ObjectMapper mapper = new ObjectMapper();
         String json = "";
 
-        data.put("prescribeCodeList", prescribeCode);
-        data.put("status", status);
+        data.put("\"prescribeCodeList\"", prescribeCode);
+        data.put("\"status\"", status);
 //        prescribeCode.put("status", status);
         try{
             json = mapper.writeValueAsString(data);
