@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/inspection-service")
@@ -19,17 +18,30 @@ public class InspectionController {
     private final KafkaProducer kafkaProducer;
 
     @PostMapping("/conclusion")
-    void insertConclusion(@RequestBody List<ConclusionDTO> conclusion){
-        service.insertConclusionBatch(conclusion);
+    public String insertConclusion(@RequestBody List<ConclusionDTO> conclusion){
 
         String barcode =conclusion.get(0).getBarcode();
 
         kafkaProducer.send("sendBarcode",barcode);
+
+        String text;
+
+        try{
+            service.insertConclusionBatch(conclusion);
+            text= barcode;
+        }catch (Exception e){
+            System.out.println(e);
+            text= barcode;
+        }
+
+        return text;
     }
 
     @PutMapping("/conclusion")
-    void updateConclusion(@RequestBody List<ConclusionDTO> conclusion) {
+    public String updateConclusion(@RequestBody List<ConclusionDTO> conclusion) {
         service.updateConclusionBatch(conclusion);
+
+        return "성공하였습니다.";
     }
 
 }
