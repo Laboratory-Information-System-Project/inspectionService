@@ -18,7 +18,7 @@ public class InsertController {
     @PostMapping("/insert")
     public void patient(@RequestBody HashMap<String, String>barcode){
         System.out.println(barcode.get("barcode"));
-//        kafkaProducer.send("sendBarcodeUpdate",barcode.get("barcode"));
-//        service.InspectionAdd(barcode);
+       kafkaProducer.send("sendBarcodeUpdate",barcode.get("barcode"));
+       service.InspectionAdd(barcode);
     }
 }

@@ -33,4 +33,9 @@ public class KafkaProducer {
 
         kafkaTemplate.send(topic, json);
     }
+
+    public void send(String topic, String barcode){
+
+        kafkaTemplate.send(topic, barcode);
+    }
 }
