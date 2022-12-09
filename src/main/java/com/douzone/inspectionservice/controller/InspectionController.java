@@ -6,6 +6,7 @@ import com.douzone.inspectionservice.service.Kafka.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,23 +19,31 @@ public class InspectionController {
     private final KafkaProducer kafkaProducer;
 
     @PostMapping("/conclusion")
-    public String insertConclusion(@RequestBody List<ConclusionDTO> conclusion){
+    public List<String> insertConclusion(@RequestBody List<ConclusionDTO> conclusion){
 
         String barcode =conclusion.get(0).getBarcode();
+        String orderCode =conclusion.get(0).getOrderCode();
 
-        kafkaProducer.send("sendBarcode",barcode);
+        String text1 = barcode;
+        String text2 = orderCode;
 
-        String text;
+        List data = new ArrayList<>();
+
+        data.add(text1);
+        data.add(text2);
+
+        kafkaProducer.send("sendBarcode",barcode, orderCode);
+
 
         try{
             service.insertConclusionBatch(conclusion);
-            text= barcode;
         }catch (Exception e){
             System.out.println(e);
-            text= barcode;
         }
 
-        return text;
+        System.out.println(data);
+
+        return data;
     }
 
     @PutMapping("/conclusion")
