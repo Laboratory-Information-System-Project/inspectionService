@@ -25,7 +25,7 @@ public class KafkaProducer {
 
         data.put("\"prescribeCodeList\"", prescribeCode);
         data.put("\"status\"", status);
-//        prescribeCode.put("status", status);
+
         try{
             json = mapper.writeValueAsString(data);
         }catch (JsonProcessingException e){
@@ -37,24 +37,20 @@ public class KafkaProducer {
         return status;
     }
 
+    public void send(String topic, String barcode, String orderCode){
+        Map<String, Object> data = new HashMap<>();
+        ObjectMapper mapper = new ObjectMapper();
+        String json = "";
 
-    // public UserDto send(String topic, UserDto userDto){
-    //     ObjectMapper mapper = new ObjectMapper();
-    //     String jsonInString = "";
-    //
-    //     try{
-    //         jsonInString = mapper.writeValueAsString(userDto);
-    //     }catch (JsonProcessingException e){
-    //         e.printStackTrace();
-    //     }
-    //
-    //     kafkaTemplate.send(topic, jsonInString);
-    //
-    //     return userDto;
-    // }
+        data.put("barcode", barcode);
+        data.put("orderCode", orderCode);
 
-    public void send(String topic, String barcode){
+        try{
+            json = mapper.writeValueAsString(data);
+        }catch (JsonProcessingException e){
+            e.printStackTrace();
+        }
 
-        kafkaTemplate.send(topic, barcode);
+        kafkaTemplate.send(topic, json);
     }
 }
