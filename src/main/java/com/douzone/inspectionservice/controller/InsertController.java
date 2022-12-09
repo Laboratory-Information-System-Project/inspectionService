@@ -16,15 +16,9 @@ public class InsertController {
     private final InsertService service;
     private final KafkaProducer kafkaProducer;
     @PostMapping("/insert")
-    public void patient(@RequestBody HashMap<String, String> barcode){
-        System.out.println(barcode);
-        service.InspectionAdd(barcode);
-    }
-    @PostMapping("updateData")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void updateData(@RequestBody HashMap<String, List<String>> prescribeCode){
-        System.out.println(prescribeCode);
-        kafkaProducer.send("updateStatus","D", prescribeCode.get("prescribeCodeList"));
-
+    public void patient(@RequestBody HashMap<String, String>barcode){
+        System.out.println(barcode.get("barcode"));
+//        kafkaProducer.send("sendBarcodeUpdate",barcode.get("barcode"));
+//        service.InspectionAdd(barcode);
     }
 }

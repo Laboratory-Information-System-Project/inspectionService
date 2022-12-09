@@ -17,25 +17,25 @@ import java.util.Map;
 public class KafkaProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public String send(String topic, String status, List<String> prescribeCode){
-        System.out.println("안에 들어 있는 정보"+prescribeCode);
-        Map<String, Object> data = new HashMap<>();
-        ObjectMapper mapper = new ObjectMapper();
-        String json = "";
-
-        data.put("\"prescribeCodeList\"", prescribeCode);
-        data.put("\"status\"", status);
-//        prescribeCode.put("status", status);
-        try{
-            json = mapper.writeValueAsString(data);
-        }catch (JsonProcessingException e){
-            e.printStackTrace();
-        }
-
-        kafkaTemplate.send(topic, json);
-
-        return status;
-    }
+//    public String send(String topic, String status, List<String> prescribeCode){
+//        System.out.println("안에 들어 있는 정보"+prescribeCode);
+//        Map<String, Object> data = new HashMap<>();
+//        ObjectMapper mapper = new ObjectMapper();
+//        String json = "";
+//
+//        data.put("\"prescribeCodeList\"", prescribeCode);
+//        data.put("\"status\"", status);
+////        prescribeCode.put("status", status);
+//        try{
+//            json = mapper.writeValueAsString(data);
+//        }catch (JsonProcessingException e){
+//            e.printStackTrace();
+//        }
+//
+//        kafkaTemplate.send(topic, json);
+//
+//        return status;
+//    }
 
 
     // public UserDto send(String topic, UserDto userDto){

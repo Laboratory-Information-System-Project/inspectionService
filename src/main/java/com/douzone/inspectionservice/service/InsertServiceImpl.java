@@ -14,4 +14,5 @@ public class InsertServiceImpl implements InsertService{
     public void InspectionAdd(HashMap<String, String> barcode) {
         mapper.InspectionAdd(barcode);
     }
+
 }
