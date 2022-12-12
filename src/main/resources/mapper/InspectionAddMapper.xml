@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.douzone.inspectionservice.mapper.InspectionAddMapper">
-    <insert id="InspectionAdd" parameterType="Map">
+    <insert id="inspectionAdd" parameterType="HashMap">
         INSERT into register
         (inspector_id,barcode,register_dt)
         values

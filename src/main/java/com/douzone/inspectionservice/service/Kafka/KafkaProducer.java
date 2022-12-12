@@ -6,10 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -34,8 +31,8 @@ public class KafkaProducer {
         kafkaTemplate.send(topic, json);
     }
 
-    public void send(String topic, String barcode){
+    public void send(String topic, Object barcode){
 
-        kafkaTemplate.send(topic, barcode);
+        kafkaTemplate.send(topic, barcode.toString());
     }
 }
