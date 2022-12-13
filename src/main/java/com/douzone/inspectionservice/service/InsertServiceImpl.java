@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -12,12 +13,8 @@ import java.util.Map;
 public class InsertServiceImpl implements InsertService{
     private final InspectionAddMapper mapper;
     @Override
-    public void InspectionAdd(HashMap<String, Object> barcode) {
-        Map<String, String> insert = new HashMap<>();
-        insert.put("inspectorId", barcode.get("inspectorId").toString());
-        insert.put("barcode", barcode.get("barcode").toString());
-
-        mapper.inspectionAdd(insert);
+    public void InspectionAdd(List<Object> barcodeList) {
+        mapper.InspectionAdd(barcodeList);
     }
 
 }

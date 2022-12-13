@@ -16,9 +16,13 @@ public class InsertController {
     private final InsertService service;
     private final KafkaProducer kafkaProducer;
     @PostMapping("/insert")
-    public void patient(@RequestBody HashMap<String, Object>barcode){
-        System.out.println(barcode.get("barcode"));
-       kafkaProducer.send("sendBarcodeUpdate",barcode.get("barcode"));
-       service.InspectionAdd(barcode);
+    public void patient(@RequestBody HashMap<String, List<Object>> barcodeList){
+        System.out.println(barcodeList.get("barcodeList"));
+        service.InspectionAdd(barcodeList.get("barcodeList"));
+    }
+    @PostMapping("/kafka")
+    public void kafka(@RequestBody HashMap<String ,String>barcodeList){
+        System.out.println(barcodeList.get("barcodeList"));
+        kafkaProducer.send("sendBarcodeUpdate",barcodeList.get("barcodeList"));
     }
 }

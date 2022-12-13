@@ -3,10 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.douzone.inspectionservice.mapper.InspectionAddMapper">
-    <insert id="inspectionAdd" parameterType="HashMap">
+    <insert id="InspectionAdd" parameterType="Map">
         INSERT into register
-        (inspector_id,barcode,register_dt)
+        (inspector_id,barcode,register_dt,prescribe_code)
         values
-        (#{inspectorId},#{barcode},now());
+        <if test="barcodeList != null">
+            <foreach collection="barcodeList" item="item" separator=",">
+                (#{item.inspectorId},#{item.barcode},now(),#{item.prescribeCode})
+            </foreach>
+        </if>
     </insert>
 </mapper>
