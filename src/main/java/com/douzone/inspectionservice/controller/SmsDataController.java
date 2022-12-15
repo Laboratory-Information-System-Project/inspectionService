@@ -2,6 +2,7 @@ package com.douzone.inspectionservice.controller;
 
 
 import com.douzone.inspectionservice.domain.SmsDataDTO;
+import com.douzone.inspectionservice.service.Kafka.KafkaProducer;
 import com.douzone.inspectionservice.service.SmsDataService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import java.util.List;
 @Controller
 public class SmsDataController {
     private final SmsDataService service;
+    private final KafkaProducer kafkaProducer;
 
     @GetMapping("/smsData/all")
     public List<SmsDataDTO> smsDataList(){
@@ -38,7 +40,9 @@ public class SmsDataController {
     }
 
     @DeleteMapping("/smsData/{smsNo}")
-    public void delete(@PathVariable int smsNo) {
-        service.delete(smsNo);
+    public void delete(@PathVariable String smsNo) {
+
+        service.delete(Integer.parseInt(smsNo));
+        kafkaProducer.send("smsDelete", smsNo);
     }
 }
