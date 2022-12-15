@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.douzone.inspectionservice.mapper.SmsDataMapper">
+
+    <select id="smsSelectAll" resultType="com.douzone.inspectionservice.domain.SmsDataDTO">
+        select *
+        from smsdata
+    </select>
+
+    <insert id="insert" parameterType="com.douzone.inspectionservice.domain.SmsDataDTO">
+        INSERT INTO smsdata(sms_title, sms_content)
+        VALUES(#{smsTitle}, #{smsContent})
+    </insert>
+
+    <update id="update" parameterType="com.douzone.inspectionservice.domain.SmsDataDTO">
+        UPDATE smsdata
+        SET sms_title = #{smsTitle}, sms_content = #{smsContent}
+        WHERE sms_no = #{smsNo}
+    </update>
+
+    <delete id="delete" parameterType="com.douzone.inspectionservice.domain.SmsDataDTO">
+        DELETE FROM smsdata
+        WHERE sms_No = #{smsNo}
+    </delete>
+
+</mapper>
