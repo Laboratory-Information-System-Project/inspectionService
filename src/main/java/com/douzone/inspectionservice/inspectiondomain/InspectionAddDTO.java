@@ -17,4 +17,7 @@ public class InspectionAddDTO {
     private String barcode;
     private LocalDate registerDt;
     private Long prescribeCode;
+    private String statusCode;
+    private String cancelRegisterId;
+    private LocalDate cancelRegisterDt;
 }

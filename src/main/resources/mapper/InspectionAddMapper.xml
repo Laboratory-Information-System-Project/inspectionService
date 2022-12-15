@@ -13,4 +13,12 @@
             </foreach>
         </if>
     </insert>
+
+    <update id="updateMapper">
+            UPDATE register
+            <set>
+                cancel_register_id = #{cancelRegisterId}, cancel_register_dt = now()
+            </set>
+            WHERE barcode = #{barcode};
+    </update>
 </mapper>

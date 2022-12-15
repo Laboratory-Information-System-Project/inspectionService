@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -15,6 +14,11 @@ public class InsertServiceImpl implements InsertService{
     @Override
     public void InspectionAdd(List<Object> barcodeList) {
         mapper.InspectionAdd(barcodeList);
+    }
+
+    @Override
+    public void updateMapper(HashMap<String, String> updateData) {
+        mapper.updateMapper(updateData);
     }
 
 }

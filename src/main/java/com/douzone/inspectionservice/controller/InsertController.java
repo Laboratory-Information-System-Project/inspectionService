@@ -25,4 +25,16 @@ public class InsertController {
         System.out.println(barcodeList.get("barcodeList"));
         kafkaProducer.send("sendBarcodeUpdate",barcodeList.get("barcodeList"));
     }
+
+    @PostMapping("/cancellation")
+    public void cancellation(@RequestBody HashMap<String, String> updateData){
+        System.out.println(updateData);
+        service.updateMapper(updateData);
+    }
+
+    @PostMapping("/cancellationKafka")
+    public  void cancellationKafka(@RequestBody HashMap<String,String> updateData){
+        System.out.println(updateData);
+        kafkaProducer.send("sendBarcodeReUpdate",updateData);
+    }
 }
